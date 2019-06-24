@@ -1,0 +1,27 @@
+# representing a data model in tables
+
+take each table and the relationships, augment them with keys
+
+Primary key: a way for us to refer to particular row
+
+Logical key: used to look up row from outside world
+
+Foreign key: links from one row in a table to another when called
+
+link foreign key to primary keys
+
+CREATE TABLE Album (
+	id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+	artist_id INTEGER,
+	title	TEXT
+)
+
+CREATE TABLE Track (
+	id 		INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+	title	TEXT,
+	album_id INTEGER,
+	genre_id INTEGER,
+	len INTEGER, rating INTEGER, count INTEGER
+)
+
+artist_id, genre_id, album_id are foreign keys 

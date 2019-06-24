@@ -1,0 +1,6 @@
+Primary contributors:
+Ben Pinkert - https://github.com/bpinkert
+
+Secondary contributors:
+mavieth - https://github.com/mavieth/check-domains-py/
+barseghyanartur - https://github.com/barseghyanartur/tld/

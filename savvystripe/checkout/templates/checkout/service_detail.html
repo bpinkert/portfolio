@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load static %}
+{% get_media_prefix as MEDIA_PREFIX %}
+
+
+{% block content %}
+  <h1>Title: {{ service.title }}</h1>
+          <p> Sku: {{ service.sku }} </p>
+          <p> Price: {{ service.value }} </p>
+          <p class="text-info"> Description: {{ service.description }} </p>
+			{% load static %}
+			{% get_media_prefix as MEDIA_PREFIX %}
+
+          <p class="text-center"><img src="{{MEDIA_PREFIX}}{{ service.image }}" alt="{{ service.title }}" class="img-responsive img-thumbnail" /></p>
+          <div class="text-center">
+            <form action="{% url 'add-subscription' %}" method="post"> {% csrf_token %}
+            <input id="plan_id" type="hidden" name="planid" value="{{ service.sku }}">
+            <input id="plan_value" type="hidden" name="plan_value" value="{{ service.value }}">
+            <input type="submit" value="Add to cart" class="btn btn-primary">
+            </form>
+            </div>
+
+          
+
+{% endblock %}

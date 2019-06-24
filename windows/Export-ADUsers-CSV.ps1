@@ -1,0 +1,1 @@
+Get-ADUser -Filter * -Properties *|where {$_.enabled -eq $true} |select mail, givenName, sn, name, title, department, telephoneNumber, mobile, facsimileTelephoneNumber, streetAddress, l, st, postalCode, c  |Export-CSV "C:\Users\apex\Desktop\adusers.csv"

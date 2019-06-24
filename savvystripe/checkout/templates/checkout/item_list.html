@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load static %}
+{% get_media_prefix as MEDIA_PREFIX %}
+
+{% block content %}
+<h2 class="text-center">Products for sale</h2> 
+{% if item_list %}
+<div class="row">
+        {% for item in item_list %}
+        <div class="col-lg-4">
+          <h2 class="text-center">{{ item.title }}</h2>
+          <p class="text-center"><a class="btn btn-primary" href="{% url 'item' item.pk %}"><img src="/media/{{ item.image1 }}" alt="{{ item.title }}" class="img-responsive img-thumbnail" /></a></p>
+          <p class="text-center"> Sku: {{ item.sku }} </p>
+          <p class="text-center"> Price: {{ item.value }} </p>
+          <p class="text-info text-center"> Description: {{ item.description }} </p>
+          <p class="text-center"><a class="btn btn-primary" href="{% url 'item' item.pk %}" role="button">View details &raquo;</a></p>
+            <div class="text-center">
+            <form action="{% url 'add-to-cart' %}" method="post"> {% csrf_token %}
+            <label for="your_name">Quantity: </label>
+            <input id="quantity" type="number" name="quantity" value="1" style="width:75px">
+            <input id="item_id" type="hidden" name="item_id" value="{{ item.pk }}">
+            <input id="item_value" type="hidden" name="item_value" value="{{ item.value }}">
+            <input id="product_name" type="hidden" name="product_name" value="{{ item.title }}">
+            <input type="submit" value="Add to cart" class="btn btn-primary">
+                  </form>
+            </div>
+        
+        </div>
+        {% endfor %}
+</div>
+{% else %}
+      <p>There are no items for sale.</p>
+    {% endif %}       
+{% endblock %}
+
+
+    
+
+

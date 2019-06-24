@@ -1,0 +1,33 @@
+# inserting relational data
+
+sql data:
+ 
+insert into Artist (name) values ('Led Zepplin')
+insert into Artist (name) values ('AC/DC')
+
+2 fields, id and name. it increments the id per entry
+
+genre:
+
+insert into Genre (name) values ('Rock')
+insert into Genre (name) values ('Metal')
+
+Rock is 1 
+Metal is 2
+
+album: 
+
+foreign key time
+
+insert into Album (title,artist_id) values ('Who Made Who',2)
+insert into Album (title,artist_id) values ('IV',1)
+
+now our artist_id is a foreign key, must be placed in explicity because will be used by code
+
+artist_id => genre
+
+import data:
+
+insert into Track (title, rating, len, count, album_id, genre_id) values ('Black Dog', 5, 297, 0, 2, 1)
+
+now we have the following fields in the Track table: id, title, album_id, genre_id, len, rating, count

@@ -1,0 +1,99 @@
+# types
+
+what does type mean?
+
+- variables, literals and constants have a "type"
+- python knows the difference between an integer number and a string
+- for eg "+" means "addition" if something is a number and "concatenate" if something is a string
+
+type matters
+
+- python knows what "type" everything is
+- some operations are prohibited
+- you cannot "add 1" to a string
+- we can ask python what type something is by using the type() function
+
+eg.
+>>> e = 'hello there'
+>>> type(e)
+<type 'str'>
+
+several types of numbers
+
+numbers have two main types
+- integers are whole: -14, 2.0, 1, 100
+- floating point numbers have decimal parts: -2.5, 0.0, 98.6, 14.0
+
+- there are other number types - variations on float and integer
+
+type conversions
+
+- when you put an integer and floating point in an expression the integer is implicitly converted to a float
+- you can control this with the built in functions int() and float()
+
+eg.
+>>> i = 42
+>>> type(i)
+<type 'int'>
+>>> f = float(i)
+>>> print f
+42.0
+>>> type(f)
+<type 'float'>
+
+string conversions
+
+- can use int() and float() to convert between strings and integers
+- will get error if string does not contain numbers
+
+user input
+
+- we can tell python to read data from user with raw_input function
+- raw_input function returns a string
+
+converting user input
+
+- if we want to read a number from the user, we must convert it from a string to a number using a type conversion function
+- later we will deal with bad input data
+
+eg.
+inp = raw_input("Europe floop?") # enter 0 
+usf = int(inp) + 1
+print "US floor".usf
+
+Europe floor? 0
+US floor 1
+
+comments in python
+
+- anything after # is ignored
+
+string operations
+
+some operators apply to strings
++ implies "concatenation"
+* implies "multiple concatenation"
+
+eg.
+>>> print 'abc' + '123'
+abc123
+>>> print 'Hi' * 5
+HiHiHiHiHi
+
+mneumonic variable names
+
+- how we choose variables names, follow best practice
+- name variables to help us remember what we intend to store
+- can confuse beginning students because well named variables often sound like they must be keywords
+
+summary
+
+- type
+- reserved words
+- variables (mnemonic)
+- operators
+- operator precedence
+- integer division
+- conversion between types
+- user input
+- comments

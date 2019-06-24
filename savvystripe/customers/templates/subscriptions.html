@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+{% block content %}
+
+<h2 class="text-center">My Services</h2>
+<div class="table-responsive">
+<h3>Subscriptions</h3>
+<table class="table table-bordered table-hover">
+<tr class="row">
+<th>Created</th>
+<th>Name</th>
+<th>Amount</th>
+<th>Billing Cycle</th>
+<th>Subscription Status</th>
+<th>Cancel Subscription</th>
+</tr>
+{% for d in data_list %}
+<tr class="row">
+<td class="created"> {{ d.created }} </td>
+<td class="planid">{{ d.plan.name }} </td>
+<td class="amount">${{ d.plan.amount }} </td>
+<td class="interval"> {{ d.plan.interval }}</td>
+<td class="status"> {{ d.status }} </td>
+
+{% url 'unsubscribe' as unsubscribe %}
+<td class="cancel"> 
+<form class='form-inline' action="/unsubscribe/" method="POST" id="payment-form"> {% csrf_token %}
+            <div class="form-group">
+                <input type="submit" class="btn btn-warning submit text-center" value="Unsubscribe">
+                </div>
+                </form>
+                </td>
+</tr>
+{% endfor %}
+</table>
+</div>
+
+
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'javascript/services.js' %}"></script>
+
+{% endblock %}

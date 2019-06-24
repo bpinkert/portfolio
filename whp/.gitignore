@@ -1,0 +1,7 @@
+*.idea
+*.xlsx
+*.txt
+build
+dist
+*.zip
+*.html

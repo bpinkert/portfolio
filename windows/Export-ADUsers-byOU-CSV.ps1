@@ -1,0 +1,1 @@
+Get-ADUser -SearchBase "OU=SBSUsers,OU=Users,OU=MyBusiness,DC=amec,DC=local" -Filter * -Properties * | select mail, givenName, sn, name, title, department, telephoneNumber, mobile, facsimileTelephoneNumber, streetAddress, l, st, postalCode, c  |Export-CSV "C:\Users\apex\Desktop\SBSUsers.csv"

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class='row'>
+<div class='col-lg-8 col-lg-offset-2'>
+<!-- <h1> {{ title }} </h1>
+{% if confirm_message %}
+<p> {{ confirm_message }}</p>
+{% endif %} -->
+<!-- {% if form %}
+<form method='POST' action=''> {% csrf_token %}
+{{ form|crispy }}
+<input type='submit' value='Submit Form' class='btn btn-default' />
+</form> -->
+<h1>Search Domains</h1>
+<div class="">
+    		<form action="{% url 'domain-results' %}" method="post"> {% csrf_token %}
+    		<label class="text-left">Domain Name*</label>
+    		<input class="textinput textInput form-control" id="id_domainname" maxlength="100" name="domainname" value="" required="" type="text">
+    		<input type="submit" value="Submit Form" class="btn btn-default text-left">
+			</form>
+			</div>
+
+{% endif %}
+{% endblock %}

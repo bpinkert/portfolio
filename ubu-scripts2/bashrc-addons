@@ -1,0 +1,67 @@
+#!/bin/bash
+
+## try 1 fail: echo only spits out the external ip into the bashrc, need to escape it properly
+#echo alias extip="echo`ifconfig eth0 2>/dev/null|awk '/inet addr:/ {print $2}'|sed 's/addr://'`" >> ~/.bashrc
+
+#extipRAW=`ifconfig eth0 2>/dev/null|awk '/inet addr:/ {print $2}'|sed 's/addr://'` 
+#echo alias extip=echo "$extipRAW" >> ~/.bashrc
+## try 2 fail:"  can't use the entire string, have to assign each command its own variable
+
+# ifeth="`ifconfig eth0 2>/dev/null|"
+# awkinet="awk '/inet addr:/ {print $2}'|"
+# sedaddr="sed 's/addr://'`"
+
+#all3="`ifconfig eth0 2>/dev/null|awk '/inet addr:/ {print $2}'|sed 's/addr://'`"
+## lets try treating each variable as a string
+# echo alias extip="echo printf '%s%s%s' ${ifeth}${awkinet}${sedaddr}" >> ~/.bashrc
+## try 3 fail: didn't spit out hte variables correctly, ill move the quote mark
+#echo alias extip=echo "printf '%s%s%s' ${ifeth}${awkinet}${sedaddr}" >> ~/.bashrc
+## try 4 fail: did the same thing
+#echo alias extip=echo printf "%s%s%s" "${ifeth}""${awkinet}""${sedaddr}" >> ~/.bashrc
+## try 5 fail: same thing, i'll try it without echoing the variables
+#echo alias extip=printf "%s%s%s" "${ifeth}""${awkinet}""${sedaddr}" >> ~/.bashrc
+## try 6 fail: again, lets forget printf
+#echo alias extip=echo "${ifeth}""${awkinet}""${sedaddr}" >> ~/.bashrc
+## try 7 fail: this time it didnt spit out the variables at all
+#echo alias extip=echo ${all3} >> ~/.bashrc
+## try 8 fail: back to spitting out the command return, gonna try escaping with square brackets
+#all3="[`ifconfig eth0 2>/dev/null|awk '/inet addr:/ {print $2}'|sed 's/addr://'`]"
+#echo alias extip=echo ${all3} >> ~/.bashrc
+## try 9 fail: just added the square brackets 
+
+## giving up for tonight, adding in an easy fix as a cheat
+#echo alias extip='curl icanhazip.com' >> ~/.bashrc
+## try 10 CHEAT fail: wow didn't add either single or double ticks, thats annoying
+curlcheat="'curl -4 https://icanhazip.com/'"
+echo alias extip="$curlcheat" >> ~/.bashrc;
+## took about 5 more tries to get the CHEAT to work, i obviously need to read more about advanced shell scripting and the usage of awk and sed
+echo alias aptgrade="'sudo apt-get update && sudo apt-get -y upgrade'" >> ~/.bashrc
+echo alias ports="'netstat -tulanp'" >> ~/.bashrc
+echo alias header="'curl -I'" >> ~/.bashrc
+echo alias headerc="'curl -I --compress'" >> ~/.bashrc
+CD1="..='cd ..'"
+echo alias $CD1 >> ~/.bashrc
+CD2="...='cd ../..'"
+echo alias $CD2 >> ~/.bashrc
+CD3="....='cd ../../..'"
+echo alias $CD3 >> ~/.bashrc
+intense="nmap-i='nmap -T4 -A -v'"
+echo alias $intense >> ~/.bashrc
+intenseu="nmap-iu='nmap -sS -sU -T4 -A -v'"
+echo alias $intenseu >> ~/.bashrc
+intenset="nmap-it='nmap -p 1-65535 -T4 -A -v'"
+echo alias $intenset >> ~/.bashrc
+dodas="\"default or (discovery and safe)\""
+slowcomp="'sudo nmap -sS -sU -T4 -A -v -PE -PP -PS80,443 -PA3389 -PU40125 -PY -g 53 --script $dodas'"
+echo alias nmap-comp="$slowcomp" >> ~/.bashrc
+echo alias nmap-p="'nmap -sn'" >> ~/.bashrc
+echo alias nmap-tr="'nmap -sn --traceroute'" >> ~/.bashrc
+echo alias nmap-inp="'nmap -T4 -A -v -Pn'" >> ~/.bashrc
+echo alias pxg="'ps aux|grep'" >> ~/.bashrc
+echo alias ppid="'lsof -wni'" >> ~/.bashrc
+echo -e 'function kills9 {\n\tkill $1 -s 9\n}' >> ~/.bash_profile
+# adding nmap quick scan plus
+echo alias nmap-quickp="nmap -sV -T4 -O -F --version-light -vv" >> ~/.bashrc
+
+# at the end we auto-source the new .bashrc
+source ~/.bashrc

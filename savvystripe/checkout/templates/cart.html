@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+    {% if request.session.carttype == 'item' %}
+    <div class="table-responsive" id="cart-div">
+    <table class="table table-bordered table-hover" id="cart-table">
+        <tr>
+            <th class="text-center">Product</th>
+            <th class="text-center">Quantity</th>
+            <th class="text-center">Total Price</th>
+            <th class="text-center">Remove</th>
+        </tr>
+        {% for item in cart %}
+        <tr class="item">
+            <td style="width:25%" class="text-center">{{ item.product }}</td>
+            <td style="width:25%" class="text-center">{{ item.quantity }}</td>
+            <td style="width:25%" class="text-center total-price">{{ item.total_price }}</td>
+            <td style="width:25%" class="text-center"> <a href="{% url 'remove-from-cart' %}?item_id={{ item.product.pk }}" class="btn btn-sm btn-warning"> Remove Item</a></td>
+        </tr>
+        {% endfor %}
+        </table>
+    </div>
+
+    <div class="col col-md-3 col-md-offset-9 table-responsive">    
+        <table class="table table-bordered table-hover">
+        <tr>    
+            <th class="text-center">Total</th>
+        </tr>
+        <tr>
+            <td class="text-center" id="total">  </td>
+        </tr>
+        <tr>
+            <td class="text-center">  
+            <form class='form-inline' action="{% url 'before-checkout' %}" method="POST" id="payment-form"> {% csrf_token %}
+            <div class="form-group">
+                <p id="total"></p>
+                <input type="submit" class="btn btn-primary submit" value="Check out">
+                </div>
+                </form>
+            </td>
+        </tr>
+    </table>
+    </div>
+    {% endif %}
+    {% if request.session.carttype == 'subscription' %}
+        <div class="table-responsive" id="cart-div">
+    <table class="table table-bordered table-hover" id="cart-table">
+        <tr>
+            <th class="text-center">Plan</th>
+            <th class="text-center">Total Price</th>
+            <th class="text-center">Remove</th>
+        </tr>
+        {% for item in cart %}
+        <tr class="item">
+            <td style="width:33%" class="text-center planid" id="{{ item.product.sku }}">{{ item.product.sku }}</td>
+            <td style="width:33%" class="text-center total-price" id="{{ item.total_price}}">{{ item.total_price }}</td>
+            <td style="width:33%" class="text-center"> <a href="{% url 'remove-subscription' %}?planid={{ item.product.sku }}" class="btn btn-sm btn-warning"> Remove Plan</a></td>
+        </tr>
+        {% endfor %}
+        </table>
+    </div>
+
+    <div class="col col-md-3 col-md-offset-9 table-responsive">    
+        <table class="table table-bordered table-hover">
+        <tr>    
+            <th class="text-center">Total</th>
+        </tr>
+        <tr>
+            <td class="text-center" id="total">  </td>
+        </tr>
+        <tr>
+            <td class="text-center">  
+            <form class='form-inline' action="{% url 'subscribe' %}" method="POST" id="payment-form"> {% csrf_token %}
+            <div class="form-group">
+                <p id="total"></p>
+                <input type="submit" class="btn btn-primary submit" value="Check out">
+                </div>
+                </form>
+            </td>
+        </tr>
+    </table>
+    </div>
+    {% endif %}
+
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'javascript/cart.js' %}"></script>
+{% endblock %}

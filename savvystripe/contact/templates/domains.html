@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class='row'>
+<div class='col-lg-8 col-lg-offset-2'>
+<h1> {{ title }} </h1>
+{% if confirm_message %}
+<p> {{ confirm_message }}</p>
+{% endif %}
+{% if form %}
+<form method='POST' action=''> {% csrf_token %}
+{{ form|crispy }}
+<input type='submit' value='Submit Form' class='btn btn-default' />
+</form>
+<h3> Search Results</h3>
+<div class="table-responsive">
+<table class="table table-bordered table-hover text-center">
+</tr>
+<tr class="row">
+<td colspan="2" class="text-left"><b>Registrar Information:</b></td>
+</tr>
+<tr class="row">
+<td>{{answer.registrar}}</td>
+</tr>
+<tr class="row">
+<td>{{answer.domname}}</td>
+</tr>
+<tr class="row">
+<td>{{answer.ns1}}</td>
+</tr>
+<tr class="row">
+<td>{{answer.ns2}}</td>
+</tr>
+<tr class="row">
+<td>{{answer.ns3}}</td>
+</tr>
+<tr class="row">
+<td>{{answer.status}}</td>
+</tr>
+<tr class="row">
+<td>{{answer.updated}}</td>
+</tr>
+<tr class="row">
+<td>{{answer.created}}</td>
+</tr>
+<tr class="row">
+<td>{{answer.expiration}}</td>
+</tr>
+<tr class="row">
+<td colspan="2" class="text-left"><b>Registrant Contact Information:</b></td>
+</tr>
+<tr class="row">
+<td>{{answer.reg_name}}</td>
+</tr>
+<tr class="row">
+<td>{{answer.reg_org}}</td>
+</tr>
+<tr class="row">
+<td>{{answer.reg_st}} <br>
+	{{answer.reg_st2}}</td>
+</tr>
+<tr class="row">
+<td>{{answer.reg_city}}</td>
+</tr>
+<tr class="row">
+<td>{{answer.reg_state}}</td>
+</tr>
+<tr class="row">
+<td>{{answer.reg_zip}}</td>
+</tr>
+<tr class="row">
+<td>{{answer.reg_country}}</td>
+</tr>
+<tr class="row">
+<td>{{answer.reg_phone}}</td>
+</tr>
+<tr class="row">
+<td>{{answer.reg_email}}</td>
+</tr>
+<tr class="row">
+<td colspan="2" class="text-left"><b>Administrator Contact Information:</b></td>
+</tr>
+<!-- end registrant area -->
+<tr class="row">
+<td>{{answer.adm_name}}</td>
+</tr>
+<tr class="row">
+<td>{{answer.adm_org}}</td>
+</tr>
+<tr class="row">
+<td>{{answer.adm_st}} <br>
+	{{answer.adm_st2}}</td>
+</tr>
+<tr class="row">
+<td>{{answer.adm_city}}</td>
+</tr>
+<tr class="row">
+<td>{{answer.adm_state}}</td>
+</tr>
+<tr class="row">
+<td>{{answer.adm_zip}}</td>
+</tr>
+<tr class="row">
+<td>{{answer.adm_country}}</td>
+</tr>
+<tr class="row">
+<td>{{answer.adm_phone}}</td>
+</tr>
+<tr class="row">
+<td>{{answer.adm_email}}</td>
+</tr>
+<tr class="row">
+<td colspan="2" class="text-left"><b>Technician Contact Information:</b></td>
+</tr>
+<!--  end admin area -->
+<tr class="row">
+<td>{{answer.tech_name}}</td>
+</tr>
+<tr class="row">
+<td>{{answer.tech_org}}</td>
+</tr>
+<tr class="row">
+<td>{{answer.tech_st}} <br>
+	{{answer.tech_st2}}</td>
+</tr>
+<tr class="row">
+<td>{{answer.tech_city}}</td>
+</tr>
+<tr class="row">
+<td>{{answer.tech_state}}</td>
+</tr>
+<tr class="row">
+<td>{{answer.tech_zip}}</td>
+</tr>
+<tr class="row">
+<td>{{answer.tech_country}}</td>
+</tr>
+<tr class="row">
+<td>{{answer.tech_phone}}</td>
+</tr>
+<tr class="row">
+<td>{{answer.tech_email}}</td>
+</tr>
+</table>
+</div>
+
+{% endif %}
+</div>
+</div>
+{% endblock %}
+ 

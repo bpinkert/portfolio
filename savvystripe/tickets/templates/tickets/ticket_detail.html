@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load static %}
+{% load comments %}
+
+
+{% block content %}
+{% if user.is_authenticated %}
+  <div class="table-responsive">
+  <h3>Ticket:</h3>
+  <table class="table table-bordered table-hover">
+  <tr class="row">
+  <th>Ticket ID</th>
+  <th>Description</th>
+  <th>Ticket Progress</th>
+  <th>Ticket Type</th>
+  <th>Time Submitted</th>
+
+  </tr>
+    <tr class="row">
+    <td class="id"> {{ ticket.id }}</a> </td>
+    <td class="description">{{ ticket.description }} </td>
+    <td class="ticketprogress">{{ ticket.progress }} </td>
+    <td class="tickettype">{{ ticket.ticktype }} </td>
+    <td class="time">{{ ticket.time }} </td>
+  </table>          
+  </div>
+
+
+  {% get_comment_list for ticket as comment_list %}.
+  {% if comment_list %}
+  <h3>Ticket message history</h3>
+  <div class="table-responsive">
+  <table class="table table-bordered table-hover">
+  <tr class="row">
+  <th>User</th>
+  <th>Email Address</th>
+  <th>Message</th>
+  <th>Time Submitted</th>
+  </tr>
+  {% for comment in comment_list %}
+  <tr class="row">
+  <td class="user">{{ comment.user }}</td>
+  <td class="email">{{ comment.email }}</td>
+  <td class="comment">{{ comment.comment }}</td>
+  <td class="date">{{ comment.submit_date }}</td>
+  </tr>
+  {% endfor %}
+  </table>
+  </div>
+  {% endif %}
+
+  {% get_comment_form for ticket as form %}
+  <h3>Add message to ticket</h3>
+  <table class="table table-responsive table-hover">
+    <form action="{% comment_form_target %}" method="post">
+      {% csrf_token %}
+      {{ form.comment }}
+      {{ form.content_type }}
+      {{ form.object_pk }}
+      {{ form.timestamp }}
+      {{ form.security_hash }}
+      <tr>
+        <td colspan="2">
+        <input type="hidden" name="next" value="{% url 'ticket' ticket.id %}" />
+      <input type="submit" value="Submit Message" id="id_submit" />
+        </td>
+      </tr>
+    </form>
+  </table>
+{% else %}
+      <p>Please <a href="{% url 'account_login' %}">log in</a> to leave a comment.</p>
+{% endif %}
+{% endblock %}

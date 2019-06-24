@@ -1,0 +1,12 @@
+# using databases
+
+database model or database schema is the structure or format of a datbase, scribed in a formal language supported by the database management system. a "database model" is the application of a data model when used in conjunction with a database management system
+
+common db systems
+
+- oracle
+- mysql
+- sqlserver, mssql
+- sqlite
+- postgres
+

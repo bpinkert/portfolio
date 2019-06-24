@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block script %}
+{% endblock %}
+
+{% block jquery %}
+
+{% endblock %}
+
+{% block content %}
+<div class='row'>
+<div class='col-sm-6 col-sm-offset-1'> 
+  <form class='form' action="" method="POST" id="payment-form">{% csrf_token %}
+    <label>
+      <span>Name</span>
+      <input name="cardholder-name" class="field" placeholder="Jane Doe" />
+    </label>
+    <label>
+      <span>Phone</span>
+      <input class="field" placeholder="(123) 456-7890" type="tel" />
+    </label>
+    <label>
+      <span>ZIP code</span>
+      <input name="address-zip" class="field" placeholder="94110" />
+    </label>
+    <label>
+      <span>Card</span>
+      <div id="card-element" class="field"></div>
+    </label>
+    <button type="submit">Pay $25</button>
+    <div class="outcome">
+      <div class="error"></div>
+      <div class="success">
+        Success! Your Stripe token is <span class="token"></span>
+      </div>
+    </div>
+  </form>
+</div>
+</div>
+{% endblock %}

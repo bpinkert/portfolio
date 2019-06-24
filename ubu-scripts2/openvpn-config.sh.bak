@@ -1,0 +1,48 @@
+#!/bin/bash
+# 
+#
+# Openvpn setup script
+sudo apt-get update
+sudo apt-get install -y openvpn easy-rsa
+sudo make-cadir /etc/openvpn/cadir
+sudo cd /etc/openvpn/cardir
+sudo gunzip -c /usr/share/doc/openvpn/examples/sample-config-files/server.conf.gz > /etc/openvpn/server.conf
+read -p 'KEY_COUNTRY: ' countryvar
+read -p 'KEY_PROVINCE: ' provincevar
+read -p 'KEY_CITY: ' cityvar
+read -p 'KEY_ORG: ' orgvar
+read -p 'KEY_EMAIL: ' emailvar
+read -p 'KEY_OU: ' ouvar
+sudo sed -i -e 's#export KEY_COUNTRY=US#export KEY_COUNTRY=$countryvar#g' /etc/openvpn/cardir/vars
+sudo sed -i -e 's#export KEY_PROVINCE=CA#export KEY_COUNTRY=$provincevar#g'/etc/openvpn/cadir/vars
+sudo sed -i -e 's#export KEY_CITY=SanFrancisco#export KEY_CITY=$cityvar#g' /etc/openvpn/cadir/vars
+sudo sed -i -e 's#export KEY_ORG=Fort-Funston#export KEY_ORG=$orgvar#g' /etc/openvpn/cadir/vars
+sudo sed -i -e 's#export KEY_EMAIL=me@myhost.mydomain#export KEY_EMAIL=$email#g' /etc/openvpn/cadir/vars
+sudo sed -i -e 's#export KEY_OU=MyOrganizationalUnit#export KEY_OU=$ouvar#g' /etc/openvpn/cadir/vars
+sudo sed -i -e 's#dh1024.pem#dh2048.pem#g' /etc/openvpn/server.conf  
+#oredir=';push "redirect-gateway def1 bypass-dhcp"'
+#nredir='push "redirect-gateway def1 bypass-dhcp"'
+#sed -i -e "s#$oredir#$nredir#g" /etc/openvpn/server.conf 
+odns1=';push "dhcp-option DNS 208.67.222.222"'
+ndns1='push "dhcp-option DNS 208.67.222.222"'
+odns2=';push "dhcp-option DNS 208.67.222.220"'
+ndns2='push "dhcp-option DNS 208.67.222.220"'
+sed -i -e "s#$odns1#$ndns1#g" /etc/openvpn/server.conf
+sed -i -e "s#$odns2#$ndns2#g" /etc/openvpn/server.conf
+ouser=';user nobody'
+nuser='user nobody'
+ogroup=';group nogroup'
+ngroup='group nogroup'
+sed -i -e "s#$ouser#$nuser#g" /etc/openvpn/server.conf
+sed -i -e "s#$ogroup#$ngroup#g" /etc/openvpn/server.conf
+echo 1 > /proc/sys/net/ipv4/ip_forward
+oipv4f='#net.ipv4.ip_forward=1'
+nipv4f='net.ipv4.ip_forward=1'
+sed -i -e "s#$oipv4f#$nipv4f#g" /etc/sysctl.conf
+#ufw allow ssh
+#ufw allow 1194/udp
+odfp='DEFAULT_FORWARD_POLICY="DROP"'
+ndfp='DEFAULT_FORWARD_POLICY="ACCEPT"'
+#sed -i -e "s/$odfp/$ndfp/g" /etc/default/ufw
+# stopping point: need to change the /etc/ufw/before.rules file adding openvpn routing rules
+

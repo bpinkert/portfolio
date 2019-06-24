@@ -1,0 +1,18 @@
+Terminology:
+
+Class - a template
+Method - a defined capability of a class: bark()
+Field or attribute - A bit of data in a class: length
+Object or instance - A particular instance of a class 
+
+Class: A pattern (examplar) of a class. the class of dog defines all possible dogs by listing the characteristics and behaviors they can have; the object Lassie is one partciular dog, with particular versions of the characteristics. A Dog has fur; Lassie has brown-and-white fur. 
+
+Instance: One can have an instance of a class or a particular object. The instance is the actual object created at runtime. In programmer jargon, the Lassie object is an instance of the Dog class. The set of values of the attributes of a particular object is called its state. the object consists of state and the behaviors that's defined in the object's class.
+
+Method: An object's abilities. In language, methods are verbs. Lassie, being a Dog, has the ability to bark. So bark() is one of Lassie's methods. She may have other methods as well, ie. sit() eat() walk(). Within the program, using a method usally affects only one particular object; all Dogs can bark, but you need only one particular dog to do the barking.
+
+    Class variables - belong to the class as a whole; there is only one copy of each one
+    Instance variables or attributes - data that belongs to individual objects; every object has its own copy of each one
+    Member variables - refers to both the class and instance variables that are defined by a particular class
+    Class methods - belong to the class as a whole and have access only to class variables and inputs from the procedure call
+    Instance methods - belong to individual objects, and have access to instance variables for the specific object they are called on, inputs, and class variables

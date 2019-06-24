@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block styles %}
+<style>
+.jumbotron {
+	text-align: center;
+}
+</style>
+{% endblock %}
+
+{% block jumbotron %}
+<div class="row">
+<div class="col-md-8 col-md-offset-3">
+          <p class="text-center"><img src="{% static 'img/logo.jpg' %}" class="img-responsive"/></p>
+       </div></div>
+
+<div class="jumbotron">
+        <h2>Savant Payment Portal</h2>
+        <p>This is an area where you can sign into the portal by email address to view previous or outstanding subscription fees.</p>
+      </div>
+{% endblock %}
+
+{% block content %}
+
+
+<div class="row">
+        <div class="col-md-4">
+        {% if request.user.is_authenticated %}
+        <h2 class="text-center">Account Links:</h2>
+        <p class="text-center">
+        <a class="btn btn-primary" href="{% url 'billing' %}"> Billing </a>
+        <a class="btn btn-success" href="{% url 'my-tickets' %}"> Tickets </a> 
+        <a class="btn btn-info" href="{% url 'articles' %}">Knowledgebase</a> 
+        </p>
+        {% else %}
+          <h3 class='text-center'>Log in or Sign up</h3>
+          <form class="login" method="POST" action="{% url 'account_login' %}">
+          {% csrf_token %}
+
+        <div class="input-group input-group-lg">
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-envelope"></span>
+          </span>
+          <input class="form-control" type="text" placeholder="Username or Email Address" required="true" name="login">
+        </div>
+        <div class="input-group input-group-lg">
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-lock"></span>
+          </span>
+          <input class="form-control" type="password" name="password" placeholder="Password">
+        </div> 
+        <p class="text-center">
+          <div class="text-center" style="margin:20px">
+          <span class="checkbox"></span>
+          <input class="checkboxinput" id="id_remember" name="remember" type="checkbox"> Remember Me</label> 
+          <span style="margin:20px" class="text-right"><button class="btn btn-primary  primaryAction" type="submit">Sign In</button></span>
+          </div>
+        </p>
+        <div class="btn-group btn-group-justified">
+        <p class="text-center">
+          <a class="btn btn-default button secondaryAction" href="{% url 'account_reset_password' %}">Forgot Password?</a>
+          <a class="btn btn-default button secondaryAction" href="{% url 'account_signup' %}">Signup</a>
+        </p>
+        </div>
+        </form>
+{% endif %}
+      </div>      
+        <div class="col-md-4">
+          <h2>Announcements</h2>
+          <p>Announcements placeholder </p>
+          <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
+        </div>
+        <div class="col-md-4">
+          <h2>Network Status</h2>
+          <p> Status Placeholder</p>
+       </div>
+        
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+  <h1>Title: {{ item.title }}</h1>
+          <p> Sku: {{ item.sku }} </p>
+          <p> Price: {{ item.value }} </p>
+          <p class="text-info"> Description: {{ item.description }} </p>
+			{% load static %}
+			{% get_media_prefix as MEDIA_PREFIX %}
+
+          <p class="text-center"><img src="{{MEDIA_PREFIX}}{{ item.image1 }}" alt="{{ item.title }}" class="img-responsive img-thumbnail" /></p>
+          <div class="text-center">
+    		<form action="{% url 'add-to-cart' %}" method="post"> {% csrf_token %}
+    		<label for="your_name">Quantity: </label>
+    		<input id="quantity" type="number" name="quantity" value="1"><br>
+    		<input id="item_id" type="hidden" name="item_id" value="{{ item.pk }}">
+    		<input id="item_value" type="hidden" name="item_value" value="{{ item.value }}">
+    		<input id="product_name" type="hidden" name="product_name" value="{{ item.title }}">
+    		<input type="submit" value="Add to cart" class="btn btn-primary">
+			</form>
+			</div>
+
+
+          
+
+{% endblock %}

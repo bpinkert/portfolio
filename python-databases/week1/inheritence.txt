@@ -1,0 +1,10 @@
+# inheritence
+
+reuse existing class and inherit capabilities of an existing class, then add our own code to make a new class
+
+the new class (child) has all the capabilities of the old class (parents) - and more 
+
+subclasses - child classes
+
+add new methods
+

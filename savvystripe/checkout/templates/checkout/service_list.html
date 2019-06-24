@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load static %}
+{% get_media_prefix as MEDIA_PREFIX %}
+
+{% block content %}
+
+{% if service_list %}
+<h2 class="text-center">Services Available</h2> 
+<div class="row">
+        {% for service in service_list %}
+        <div class="col-lg-4">
+          <h2>{{ service.title }}</h2>
+          <p class="text-center"><a class="btn btn-primary" href="{% url 'service' service.pk %}"><img src="/media/{{ service.image }}" alt="{{ service.title }}" class="img-responsive img-thumbnail" /></a></p>
+          <p> Sku: {{ service.sku }} </p>
+          <p> Price: {{ service.value }} </p>
+          <p class="text-info"> Description: {{ service.description }} </p>
+          <p><a class="btn btn-primary" href="{% url 'service' service.pk %}" role="button">View details &raquo;</a></p>
+          <div class="text-center">
+            <form action="{% url 'add-subscription' %}" method="post"> {% csrf_token %}
+            <input id="planid" type="hidden" name="planid" value="{{ service.sku }}">
+            <input id="value" type="hidden" name="plan_value" value="{{ service.value }}">
+            <input type="submit" value="Add to cart" class="btn btn-primary">
+            </form>
+            </div>
+        </div>
+        {% endfor %}
+</div>
+{% else %}
+      <p>There are no services for sale.</p>
+    {% endif %}       
+{% endblock %}
+
+
+    
+
+

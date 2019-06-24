@@ -1,0 +1,47 @@
+class PartyAnimal:
+  
+  # object w/ bit of data
+  x = 0
+
+  # method
+  def party(self):
+  	self.x = self.x + 1
+  	print "So far",self.x
+
+# create PartyAnimal object in an obect
+an = PartyAnimal()
+
+# calling party method in an ob
+an.party()
+an.party()
+
+# essentially 
+PartyAnimal.party(an)
+# calls PartyAnimal party
+# passes instance variable an
+# self becomes alias of an
+
+# "self" is a formal argument that refers to the object itself
+
+# self.x is saying "x within self"
+
+# self is "global within this object"
+
+# --- Playing with dir() and type() ----
+
+************************
+- The dir() command lists capabilities
+************************
+
+
+IE:
+>>> x = list()
+>>> type(x)
+<type 'list'>
+>>> dir(x)
+['__add__','__class__','__contains__','__delitem__','append','count','extend','index','insert']
+
+
+dir() displays all methods that the object contains
+
+We can use dir() to find the "capabilities" of our newly created class. 

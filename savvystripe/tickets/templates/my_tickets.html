@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+{% block content %}
+
+<h2 class="text-center">My Tickets</h2>
+<div class="table-responsive">
+<h3>Tickets</h3>
+<table class="table table-bordered table-hover">
+<tr class="row">
+<th>Ticket ID</th>
+<th>Description</th>
+<th>Time Submitted</th>
+<th>Ticket Progress</th>
+<th>View Details</th>
+</tr>
+	{% for t in tickets %}
+	<tr class="row">
+	<td class="id">{{ t.id }}  </td>
+	<td class="description">{{ t.description }} </td>
+	<td class="time">{{ t.time }} </td>
+	<td class="inprogress">{{ t.progress }} </td>
+	<td class="details"><a class="btn btn-default" href="{% url 'ticket' t.id %}" role="button">View details</a></td>
+	</tr>
+
+	{% endfor %}
+</table>
+</div>
+{% endblock %}

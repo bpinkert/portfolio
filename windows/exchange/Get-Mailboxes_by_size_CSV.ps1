@@ -1,0 +1,1 @@
+Get-Mailbox -ResultSize Unlimited | Get-MailboxStatistics | Sort-Object TotalItemSize -Descending | Select-Object DisplayName,@{label="TotalItemSize(GB)";expression={"$([math]::round($_.TotalItemSize.Value.ToBytes() /1Gb, 2)) GB"}},ItemCount -First 100 | Export-CSV Mailboxes_by_size.csv -Encoding ASCII -NoTypeInformation

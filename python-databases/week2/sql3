@@ -1,0 +1,4 @@
+INSERT INTO Ages (name, age) VALUES ('Kyden', 22);
+INSERT INTO Ages (name, age) VALUES ('Daymian', 13);
+INSERT INTO Ages (name, age) VALUES ('Asia', 29);
+INSERT INTO Ages (name, age) VALUES ('Ebow', 22);

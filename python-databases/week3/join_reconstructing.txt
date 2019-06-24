@@ -1,0 +1,42 @@
+# reconstructing data with join
+
+relational power
+
+- by removing replicated data 
+
+the JOIN Operation
+
+- the JOIN operation links across seveeral tables as part of a select operation
+- you must tell the JOIN how to use the keys that make the connection between the tables using an ON clause
+
+create a supertable that consists of the rows of more than one table. 
+
+eg.
+select Album.title, Artist.name from Album join Artist on Album.artist_id = Artist.id
+
+this statement queries when the Album.artist_id = Artist.id and returns matching tracks
+
+eg.
+select Album.title, Album.artist_id, Artist.id,Artist.name from Album join Artist on Album.artist_id = Artist.id
+
+this statement queries when Album.artist_id = Artist.id (sort by artist)
+
+construct another supertable
+
+eg.
+select Track.title, Genre.name from Track Join Genre on Track.genre_id = Genre.id
+
+this statement queries Track.genre_id = Genre.id (sort by genre)
+
+eg.
+select Track.title, Genre.name from Track Join Genre 
+
+sort by genre without the on clause: searches for all combinations 
+
+SELECT Track.title,
+	Track.genre_id,
+	Genre.id, Genre.name
+FROM Track JOIN Genre
+
+- joining two tables without an on clause gives all possible combinations of rows
+

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form action="/checkout-form/" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit" />
+</form>
+
+
+<!-- <form action="/add-to-cart/" method="post"> {% csrf_token %}
+    <label for="your_name">Quantity: </label>
+    <input id="product" type="hidden" name="product" value="prodct">
+    <input id="item-id" type="hidden" name="item-id" value="item_id">
+    <input id="quantity" type="number" name="quantity" value="">
+    <input type="submit" value="OK">
+</form> -->
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class='row'>
+<div class='col-sm-6 col-sm-offset-3'>
+<h1> {{ title }} </h1>
+{% if confirm_message %}
+<p> {{ confirm_message }}</p>
+{% endif %}
+{% if form %}
+<form method='POST' action=''> {% csrf_token %}
+{{ form|crispy }}
+<input type='submit' value='Submit Form' class='btn btn-default' />
+</form>
+{% endif %}
+</div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+$(document).ready(function(){
+
+var tickettype = '<label for="id_ticktype" class="control-label  requiredField">' + 'Ticket Type' + '<span class="asteriskField">*</span> </label>' + '<div class="controls ">' + '<select class="select form-control" id="id_ticktype" name="ticktype" required="">' + '<option value="B">Billing</option>' + '<option value="C">Customer Support</option>' + '<option value="S">Sales</option></select></div>' ;  
+
+$('div#div_id_ticktype').html(tickettype);
+});
+</script>
+
+{% endblock %}

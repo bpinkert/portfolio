@@ -1,0 +1,1 @@
+Get-mailbox | Set-Mailbox -UseDatabaseQuotaDefaults:$False -issuewarningQuota "UNLIMITED" -ProhibitSendQuota "UNLIMITED" -ProhibitSendReceive "UNLIMITED"

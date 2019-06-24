@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+  <div class="col-lg-8 col-lg-offset-2">
+  <h1>Title: {{ article.title }}</h1>
+			{% load static %}
+			{% get_media_prefix as MEDIA_PREFIX %}
+
+          <p class="text-center"><img src="{{MEDIA_PREFIX}}{{ article.image }}" alt="{{ article.title }}" class="img-responsive img-thumbnail" /></p>
+          <p> Description: {{ article.text }} </p>
+          <p> Tags: </p>
+          {{ article.tags.all }}
+          </div>
+          
+
+{% endblock %}

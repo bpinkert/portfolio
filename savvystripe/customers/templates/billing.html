@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+{% block content %}
+
+<h2 class="text-center">Billing</h2>
+<div class="table-responsive">
+<h3>Single Charges</h3>
+<table class="table table-bordered table-hover">
+<tr class="row">
+<th>Description</th>
+<th>Date</th>
+<th>Amount</th>
+<th>Card Info</th>
+<th>Charge Status</th>
+</tr>
+{% for d in data_list %}
+<tr class="row">
+<td class="description">{{ d.description }} </td>
+<td class="created"> {{ d.created }} </td>
+<td class="amount">${{ d.amount }} </td>
+<td class="source"> {{ d.source.brand }} ending in {{d.source.last4 }}</td>
+<td class="status"> {{ d.outcome.seller_message}} </td>
+</tr>
+{% endfor %}
+</table>
+</div>
+
+
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'javascript/billing.js' %}"></script>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+## object lifecycle
+
+- what is happening as objects are being constructed?
+
+- objects are created, used and discarded
+
+- constructor : set up some instance variables to have proper initial values
+
+class PartyAnimal
+  x = 0
+
+  def __init__(self):
+  	print "I am constructed"
+
+  def party(self):
+  	self.x = self.x + 1
+  	print "So far",self.x
+
+  def __del__(self):
+  	print "I am destructed", self.x
+
+ i. The constructor and destructor are optional. constructor is typically used to set up variables. the destructor is seldom used
+
+ ii. double underscore are used when special code methods called, constructor and destructor are examples.
+
+ - many instances
+
+ i. create lotes of objects, class is the templte for the object
+ ii. we store each distinct object in its own variable
+ iii. we call this having multiple instances of the same class
+ each instance has its own copy of the instance variables

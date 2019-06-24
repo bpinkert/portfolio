@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+{% block content %}
+
+<h2 class="text-center">Invoices</h2>
+<div class="table-responsive">
+<table class="table table-bordered table-hover">
+<tr class="row">
+<th>Amount Due</th>
+<th>Date</th>
+<th>Charge ID</th>
+<th>Invoice ID</th>
+<th>Paid?</th>
+</tr>
+{% for d in data_list %}
+<tr class="row">
+<td class="amount_due">${{ d.amount_due }} </td>
+<td class="date"> {{ d.date }} </td>
+<td class="charge_id">{{ d.charge }} </td>
+<td class="invoice_id"> {{ d.id }}</td>
+<td class="status"> {{ d.paid }} </td>
+</tr>
+{% endfor %}
+</table>
+</div>
+
+
+{% endblock %}
+
+{% block script %}
+
+<script src="{% static 'javascript/invoices.js' %}"></script>
+{% endblock %}

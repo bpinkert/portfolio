@@ -1,0 +1,122 @@
+    {% load staticfiles %}
+    <!-- Fixed navbar -->
+<!--     <img src="{% static 'img/logo.jpg' %}" class="img-responsive"/>
+ -->    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{% url 'home' %}">Payment Portal</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+          {% url 'home' as home %}
+          {% url 'about' as about %}
+          {% url 'services' as services %}
+{#          {% url 'products' as products %}#}
+          {% url 'contact' as contact %}
+          {% url 'account_login' as account_login %}
+          {% url 'account_signup' as account_signup %}
+          {% url 'account_change_password' as change_password %}
+          {% url 'account_reset_password' as forgot_password %}
+          {% url 'profile' as profile %}
+          {% url 'account_logout' as account_logout %}
+          {% url 'billing' as billing %}
+          {% url 'checkout' as checkout %}
+          {% url 'capture' as capture %}
+          {% url 'dashboard' as dashboard %}
+          {% url 'admin_dashboard' as admin_dashboard %}
+          {% url 'email_history' as email_history %}
+          {% url 'my_services' as my_services %}
+          {% url 'items' as items %}
+          {% url 'articles' as articles %}
+          {% url 'cart' as cart %}
+          {% url 'cart-subscribe' as cart_subscribe %}
+          {% url 'invoices' as invoices %}
+          {% url 'my-tickets' as my_tickets %}
+          <!-- {% url 'unsubscribe' as unsubscribe %} -->
+            {% if request.user.is_authenticated %}
+            <li {% if request.path == home %} class="active" {% endif %}><a href="{% url 'home' %}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Services <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              <li {% if request.path == my_services %} class="active" {% endif %}><a href="{% url 'my_services' %}">My Services</a></li>
+              <li role="separator" class="divider"></li>
+              <li {% if request.path == services %} class="active" {% endif %}><a href="{% url 'services' %}">Order new services</a></li>
+              <li {% if request.path == items %} class="active" {% endif %}><a href="{% url 'items' %}">Order addons</a></li>
+              </ul></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Billing <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              <li {% if request.path == invoices %} class="active" {% endif %}><a href="{% url 'invoices' %}">My Invoices</a></li>
+              <li><a href="#">My Quotes</a></li>
+              <li role="separator" class="divider"></li>
+              <li {% if request.path == savecard %} class="active" {% endif %}><a href="{% url 'capture' %}">Update Credit Card</a></li>
+              <!-- <li><a href="#">Order addons</a></li> -->
+              </ul></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Support <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              <li {% if request.path == my_tickets %} class="active" {% endif %}><a href="{% url 'my-tickets' %}">Tickets</a></li>
+              <li><a href="#">Announcements</a></li>
+              <li {% if request.path == articles %} class="active" {% endif %}><a href="{% url 'articles' %}">Knowledgebase</a></li>
+              <li><a href="#">Network Status</a></li>
+              </ul>
+            </li>
+            <li><a href="{% url 'submit-ticket' %}">Open Ticket</a></li>
+            {% else %}
+            <li {% if request.path == home %} class="active" {% endif %}><a href="{% url 'home' %}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+            <li {% if request.path == services %} class="active" {% endif %}><a href="{% url 'services' %}">Services</a></li>
+            <li {% if request.path == items %} class="active" {% endif %}><a href="{% url 'items' %}">Products</a></li>
+            <li {% if request.path == articles %} class="active" {% endif %}><a href="{% url 'articles' %}">Knowledgebase</a></li>
+            <li {% if request.path == contact %} class="active" {% endif %}><a href="{% url 'contact' %}">Contact</a></li>
+            {% endif %}
+          </ul>
+          <ul class="nav navbar-nav navbar-right" style="margin-right: 5%">
+            {% if request.user.is_authenticated %}
+              <li {% if request.path == cart %} class="active" {% endif %}><a href="{% url 'cart' %}" role="button" aria-haspopup="true" aria-expanded="false">{{ cartitems }}<span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart </a></li>
+            
+            <!-- <li><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-envelope"></span> Notifications <span class="caret"></span></a></li> -->
+            {% if not request.user.is_staff %}
+            <li><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Client Area</a></li>
+            {% endif %}
+            {% endif %}
+            {% if request.user.is_staff %}
+            {% if not request.path == dashboard %}
+            <li {% if request.path == dashboard %} class="active" {% endif %}><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            {% endif %}
+            {% endif %}
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> Account <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                {% if not request.user.is_authenticated %}
+                <li {% if request.path == account_login %} class="active" {% endif %}><a href="{% url 'account_login' %}">Login</a></li>
+                <li {% if request.path == account_signup %} class="active" {% endif %}><a href="{% url 'account_signup' %}">Signup</a></li>
+                <li {% if request.path == forgot_password %} class="active" {% endif %}><a href="{% url 'account_reset_password' %}">Forgot Password?</a></li>
+                {% else %}
+                <li {% if request.path == profile %} class="active" {% endif %}><a href="{% url 'profile' %}">User Profile</a></li>
+                <li {% if request.path == change_password %} class="active" {% endif %}><a href="{% url 'account_change_password' %}">Change Password</a></li>
+                <!-- <li {% if request.path == events %} class="active" {% endif %}><a href="{% url 'events' %}">Events</a></li> -->
+                <li {% if request.path == account_logout %} class="active" {% endif %}><a href="{% url 'account_logout' %}">Logout</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Service Links</li>
+                <li {% if request.path == dashboard %} class="active" {% endif %}><a href="{% url 'dashboard'  %}">Dashboard</a></li>
+                <li {% if request.path == billing %} class="active" {% endif %}><a href="{% url 'billing' %}">Billing History</a></li>
+                <li {% if request.path == email_history %} class="active" {% endif %}><a href="{% url 'email_history' %}">Email History</a></li>
+                <!-- <li {% if request.path == checkout %} class="active" {% endif %}><a href="{% url 'checkout' %}">Checkout</a></li> -->
+                {% endif %}
+                {% if request.user.is_staff %}
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Admin Links</li>
+                <li {% if request.path == admin_dashboard %} class="active" {% endif %}><a href="{% url 'admin_dashboard' %}">Admin Dashboard</a></li>
+                {% endif %}
+              </ul>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>

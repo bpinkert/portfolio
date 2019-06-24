@@ -1,0 +1,120 @@
+# variables and expressions
+
+constants 
+
+- fixed values suhc as numbers, letters, and strings are called "constants" - because their value does not change
+- numeric constants are as you expect
+- stripe constants use single-quotes or double-quotes
+
+variables
+
+- a named place in the memory where you can store data and retrieve using variable "name"
+- you can choose the names of the variables
+- you can change the contents of a variable in a later statement
+
+python variable name rules
+- must start with letter or underscore
+- consist of letters and numbers and understores
+- case sensitive
+
+reserved words
+
+cant use these for variables
+
+and del for is raise assert elif from lambda return break else global not try class except if or while continue exec import pass yield def finally in print
+
+sentences or lines
+
+x = 2 # assignment statement
+x = x + 2 # assignemnt with expression
+print x # print statement
+
+assignment statements
+
+- assign a value using assignment statement (=)
+- an assignment statement consists of an expression on the right hand side and a variable to store the result
+
+# memory
+
+a variable is a memory location used to store a value (0.6)
+
+numeric expressions
+
+- base of the lack of math symbols we use operators
+- asterisk is multiplication
+
+operator | operation
++ | Addition
+- | Subtraction
+* | Multiplication
+/ | Division
+**| Power
+% | Remainder
+
+integer division rounds 
+
+use modulo operator % to obtain remainder
+
+eg.
+>>> jj = 23
+>>> kk = jj % 5
+>>> print kk
+3
+
+modulo is kind of like division with remainder
+
+order of evaluation
+
+operator precedence rules
+
+**highest precedence rule to lowest precedence rule
+
+- parenthesis are always respected
+- exponentiation (power)
+- multiplication, division, and remainder
+- addition and subtraction
+- left to right
+
+eg.
+1 + 2 ** 3 / 4 * 5 
+power first
+1 + 8 / 4 * 5
+left to right rule, division was next operator
+1 + 2 * 5
+multiplication
+1 + 10
+add
+11
+
+operator precedence
+
+- remember the rules
+- use parenthesis
+- keep math expressions simple
+- break up operations into smaller pieces, make them clear
+
+python integer divison is weird!
+
+- integer divison truncates
+- floating point divison produces floating point numbers
+- changes in python 3
+
+eg.
+>>> print 10/2
+5
+>>> print 9/2
+4
+>>> print 99/100
+0
+>>> print 10.0/2.0
+5
+print 99.0/100.0
+0.99
+
+floating point numbers have decimals
+
+Mixing Integer and Floating
+
+- when you perform an operation where one operand is an integer and the other is a flaoting point the reulst is a floating point
+- the integer is converted to a floating point before the operator
+

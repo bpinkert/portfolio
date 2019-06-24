@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+{% block content %}
+
+{% if article_list %}
+<h2 class="text-center">Knowledgebase Articles</h2> 
+<div class="row">
+        {% for article in article_list %}
+        <div class="col-lg-4">
+          <h2 class="text-center">{{ article.title }}</h2>
+          <p class="text-center"> <img src="/media/{{ article.image }}" alt="{{ article.title}}" /> </p>
+          <p class="text-center"> Text: {{ article.text }} </p>
+          <p class="text-center"><a class="btn btn-default" href="{% url 'article' article.pk %}" role="button">Read Full Article &raquo;</a></p>
+        </div>
+        {% endfor %}
+</div>
+{% else %}
+      <p>There are no Knowledgebase Articles available</p>
+    {% endif %}       
+{% endblock %}
+
+
+    
+
+

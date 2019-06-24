@@ -1,0 +1,2 @@
+mkdir C:\Windows\system32\cygwin64
+setup-x86_64.exe -q -P nano,git,openssh,python,python-beautifulsoup,bind,bind-utils,cygwin32-w32api-headers,nginx,openssl,python-twisted,python-setuptools,cygutils, openssl -R C:\Windows\system32\cygwin64 -l C:\Users\%USERNAME%\AppData\Local\Temp -N -d
