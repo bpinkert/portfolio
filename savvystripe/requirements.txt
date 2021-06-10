@@ -8,7 +8,7 @@ carton==0.3
 celery==3.1.11
 decorator==4.0.11
 dj-stripe==0.8.0
-Django==1.11
+Django==2.2.24
 django-allauth==0.31.0
 django-appconf==1.0.1
 django-bootstrap-form==3.2.1
